@@ -32,7 +32,7 @@ FROM alpine:latest
 RUN apk add --no-cache openssl
 
 # Copy the compiled binary from the builder stage
-COPY --from=builder /usr/src/app/backend/target/release/backend /usr/local/bin/backend
+COPY --from=builder /usr/src/app/backend/target/release/backend
 
 # Set the command to run your binary
 CMD ["backend"]
