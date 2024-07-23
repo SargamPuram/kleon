@@ -28,27 +28,30 @@ AI-Powered Data Query Interface using Rust
    ```bash
    git clone https://github.com/yourusername/sql-query-tool.git
    cd sql-query-tool
-Set Up the Frontend
+    ```
+2. **Set Up the Frontend**
 
 Navigate to the frontend directory and install dependencies:
 
-bash
+ ```bash
 Copy code
 cd frontend
 npm install
-Set Up the Backend
+ ```
+3. ***Set Up the Backend***
 
 Navigate to the backend directory and install dependencies:
 
-bash
+ ```bash
 Copy code
 cd backend
 cargo build
 Configure Environment Variables
+ ```
 
-Create a .env file in both frontend and backend directories and set up your environment variables. Example .env file for frontend:
+4. ***Create a .env file in both frontend and backend directories and set up your environment variables. Example .env file for frontend: ***
 
-env
+.env
 Copy code
 NEXT_PUBLIC_API_URL=http://localhost:8080
 Example .env file for backend:
@@ -60,19 +63,21 @@ Run the Project
 
 Start the backend server:
 
-bash
+ ```bash
 Copy code
 cd backend
 cargo run
 Start the frontend server:
+ ```
 
-bash
+ ```bash
 Copy code
 cd frontend
 npm run dev
 The frontend should now be available at http://localhost:3000, and it will communicate with the backend at http://localhost:8080.
+ ```
 
-Usage
+## Usage
 Explaining SQL Queries
 Navigate to the Explain Query section.
 Enter your SQL query into the text area.
