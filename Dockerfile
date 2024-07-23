@@ -28,6 +28,9 @@ RUN ls -la target/release/
 # Use a smaller base image for the final stage
 FROM debian:buster-slim
 
+# Install OpenSSL and other required libraries
+RUN apt-get update && apt-get install -y libssl-dev
+
 # Copy the compiled binary from the builder stage
 COPY --from=builder /usr/src/app/backend/target/release/backend /usr/local/bin/backend
 
