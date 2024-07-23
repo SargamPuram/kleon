@@ -12,7 +12,9 @@ RUN mkdir src && echo "fn main() {}" > src/main.rs
 
 # Build dependencies
 RUN cargo build --release
-RUN rm -f target/release/backend*
+
+# Remove the dummy source file
+RUN rm -f target/release/deps/backend*
 
 # Copy the rest of the source code
 COPY backend ./
@@ -20,11 +22,14 @@ COPY backend ./
 # Build the actual project
 RUN cargo build --release
 
+# Verify if the binary is created
+RUN ls -la target/release/
+
 # Use a smaller base image for the final stage
 FROM debian:buster-slim
 
 # Copy the compiled binary from the builder stage
-COPY --from=builder /usr/src/app/backend/target/release/kleon /usr/local/bin/kleon
+COPY --from=builder /usr/src/app/backend/target/release/backend /usr/local/bin/backend
 
 # Set the command to run your binary
-CMD ["kleon"]
+CMD ["backend"]
