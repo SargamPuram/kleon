@@ -1,41 +1,43 @@
-# Use the official Rust image as a builder
+# Use the official Rust image as the build stage
 FROM rust:latest as builder
 
-# Create a new empty shell project
-RUN USER=root cargo new --bin kleon
-WORKDIR /kleon
+# Set the working directory
+WORKDIR /app
 
-# Copy our manifests
-COPY ./Cargo.toml ./Cargo.toml
-COPY ./Cargo.lock ./Cargo.lock
+# Copy the manifest files
+COPY Cargo.toml Cargo.lock ./
 
 # This build step will cache dependencies
 RUN cargo build --release
 RUN rm src/*.rs
 
-# Copy source tree
-COPY ./src ./src
+# Copy the source files
+COPY src ./src
 
-# Build for release
-RUN rm ./target/release/deps/kleon*
+# Build the project
 RUN cargo build --release
 
-# Use the official Rust image as a runtime base image
+# Use a minimal base image for the runtime stage
 FROM debian:buster-slim
 
+# Install required dependencies
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
-# Copy the build artifact from the builder stage
-COPY --from=builder /kleon/target/release/kleon /usr/local/bin/kleon
+# Set the working directory
+WORKDIR /app
 
-# Copy the environment variable file
+# Copy the compiled binary from the builder stage
+COPY --from=builder /app/target/release/kleon /usr/local/bin/kleon
+
+# Copy the environment file if needed
 COPY .env /usr/local/bin/
 
-# Expose the port that the application runs on
+# Expose the application port
 EXPOSE 8080
 
-# Set the default PORT environment variable
+# Set the default port environment variable
 ENV PORT=8080
 
-# Run the binary
+# Run the application
 CMD ["kleon"]
+
