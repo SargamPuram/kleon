@@ -12,7 +12,7 @@ RUN mkdir src && echo "fn main() {}" > src/main.rs
 
 # Build dependencies
 RUN cargo build --release
-RUN rm -f target/release/kleon*
+RUN rm -f target/release/backend*
 
 # Copy the rest of the source code
 COPY backend ./
