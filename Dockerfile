@@ -32,7 +32,10 @@ FROM alpine:latest
 RUN apk add --no-cache openssl
 
 # Copy the compiled binary from the builder stage
-COPY --from=builder /usr/src/app/backend/target/release/backend /usr/local/bin/kleon
+COPY --from=builder /usr/src/app/backend/target/release/backend /usr/local/bin/backend
+
+# Set executable permissions
+RUN chmod +x /usr/local/bin/backend
 
 # Set the command to run your binary
 CMD ["backend"]
