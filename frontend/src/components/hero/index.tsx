@@ -16,12 +16,12 @@ const Hero = () => {
           Effortlessly generate optimized SQL queries and unlock data insights with cutting-edge AI technology.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4 mb-12">
-          <Link href="/login">
+          <Link href="/dashboard">
             <div className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer">
               Get Started
             </div>
           </Link>
-          <Link href="/features">
+          <Link href="/query">
             <div className="bg-transparent border border-white hover:bg-white hover:text-black text-white font-semibold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer">
               Learn More
             </div>
