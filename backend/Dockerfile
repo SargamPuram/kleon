@@ -1,8 +1,8 @@
-# Use the official Rust image to build the project
-FROM rust:1.73 as builder
+# Use a more recent Rust image to build the project
+FROM rust:1.79 as builder
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/backend
 
 # Copy the Cargo.toml and Cargo.lock files
 COPY Cargo.toml Cargo.lock ./
@@ -24,7 +24,7 @@ RUN cargo build --release
 FROM debian:buster-slim
 
 # Copy the compiled binary from the builder stage
-COPY --from=builder /usr/src/app/target/release/kleon /usr/local/bin/kleon
+COPY --from=builder /usr/src/app/backend/target/release/kleon /usr/local/bin/kleon
 
 # Set the command to run your binary
 CMD ["kleon"]
