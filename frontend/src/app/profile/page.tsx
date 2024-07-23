@@ -32,13 +32,13 @@ export default function ProfilePage() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1>Profile</h1>
+            {/* <h1>Profile</h1> */}
             <hr />
-            <p>Profile Page</p>
-            <h2> {data=== 'nothing' ? "Nothing" : <Link 
+            <h1 className="text-6xl">Profile Page</h1>
+            {/* <h2> {data=== 'nothing' ? "Hey" : <Link 
             href={'/profile/${data}'}>{data}
             </Link> }
-            </h2>
+            </h2> */}
             <hr />
             <div className="relative inline-flex group mt-10">
                 <div
@@ -51,12 +51,7 @@ export default function ProfilePage() {
                 >
                     Logout
                 </button>
-                <button
-                    onClick={getUserDeatils}
-                    className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                >
-                    User Details
-                </button>
+            
 
             </div>
         </div>

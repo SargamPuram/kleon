@@ -24,10 +24,17 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    font-family: 'Playwrite HU', sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.nanum-myeongjo-regular {
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 400;
+  font-style: normal;
 }
