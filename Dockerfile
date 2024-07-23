@@ -15,7 +15,7 @@ RUN cargo build --release
 RUN rm -f target/release/kleon*
 
 # Copy the rest of the source code
-#COPY backend ./
+COPY backend ./
 
 # Build the actual project
 RUN cargo build --release
