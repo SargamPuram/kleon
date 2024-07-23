@@ -1,14 +1,14 @@
 use actix_cors::Cors;
 use actix_web::{post, web, App, HttpResponse, HttpServer, Responder};
 use dotenv::dotenv;
-use env_logger;
+use env_logger::Env;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use regex::Regex;
+use std::env;
 
 mod genai;
 use genai::{GenAIModel, QueryPrompt, QueryResponse, ExplainSqlRequest};
-
 
 #[post("/generate_sql")]
 async fn generate_sql(
@@ -17,16 +17,16 @@ async fn generate_sql(
 ) -> impl Responder {
     let message = {
         let genai_model = genai_model.lock().await;
-        let dialect = prompt.dialect.to_lowercase();  // Ensure dialect handling
+        let dialect = prompt.dialect.to_lowercase();
         let prompt_text = &prompt.prompt;
 
         match genai_model.generate(prompt_text, &dialect).await {
             Ok(response) => {
                 let re = Regex::new(r"```sql\n([\s\S]*)\n```").unwrap();
-                let response_clone = response.clone();  // Clone the response before borrowing it
+                let response_clone = response.clone();
                 re.captures(&response_clone)
                     .and_then(|caps| caps.get(1))
-                    .map_or(response, |m| m.as_str().to_string())  // Use original response
+                    .map_or(response, |m| m.as_str().to_string())
             },
             Err(e) => {
                 eprintln!("Error generating response: {}", e);
@@ -42,7 +42,7 @@ async fn generate_sql(
 #[post("/explain_sql")]
 async fn explain_sql(
     req: web::Json<ExplainSqlRequest>,
-    genai_model: web::Data<Arc<Mutex<GenAIModel>>>, // Note the type here
+    genai_model: web::Data<Arc<Mutex<GenAIModel>>>,
 ) -> impl Responder {
     let prompt = &req.prompt;
     let dialect = &req.dialect;
@@ -56,13 +56,15 @@ async fn explain_sql(
     }
 }
 
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
-    env_logger::init();
+    env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
 
     let genai_model = web::Data::new(Arc::new(Mutex::new(GenAIModel::new())));
+
+    let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
+    let port = port.parse::<u16>().expect("PORT must be a valid u16");
 
     HttpServer::new(move || {
         App::new()
@@ -74,9 +76,9 @@ async fn main() -> std::io::Result<()> {
                     .allow_any_header()
             )
             .service(generate_sql)
-            .service(explain_sql) // Add the new endpoint
+            .service(explain_sql)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", port))?  // Use the port variable here
     .run()
     .await
 }
