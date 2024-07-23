@@ -1,44 +1,30 @@
-# Use the official Rust image as the build stage
-FROM rust:latest as builder
+# Use the official Rust image to build the project
+FROM rust:1.73 as builder
 
-# Set the working directory to /backend
-WORKDIR /backend
+# Set the working directory
+WORKDIR /usr/src/app
 
-# Copy the Cargo.toml and Cargo.lock files to the working directory
-COPY backend/Cargo.toml backend/Cargo.lock ./
+# Copy the Cargo.toml and Cargo.lock files
+COPY Cargo.toml Cargo.lock ./
 
-# Build the dependencies to cache them
+# Create a dummy source file to cache dependencies
+RUN mkdir src && echo "fn main() {}" > src/main.rs
+
+# Build dependencies
 RUN cargo build --release
-RUN rm src/*.rs
+RUN rm -f target/release/kleon*
 
-# Copy the source files
-COPY backend/src ./src
+# Copy the rest of the source code
+COPY . .
 
-# Build the project
+# Build the actual project
 RUN cargo build --release
 
-# Use a minimal base image for the runtime stage
+# Use a smaller base image for the final stage
 FROM debian:buster-slim
 
-# Install required dependencies
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
-
-# Set the working directory to /backend
-WORKDIR /backend
-
 # Copy the compiled binary from the builder stage
-COPY --from=builder /backend/target/release/kleon /usr/local/bin/kleon
+COPY --from=builder /usr/src/app/target/release/kleon /usr/local/bin/kleon
 
-# Copy the environment file if needed
-COPY backend/.env /usr/local/bin/
-
-# Expose the application port
-EXPOSE 8080
-
-# Set the default port environment variable
-ENV PORT=8080
-
-# Run the application
+# Set the command to run your binary
 CMD ["kleon"]
-
-
