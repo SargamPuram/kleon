@@ -1,0 +1,20 @@
+{
+    "build": {
+      "builder": "nixpacks",
+      "nixpacks": {
+        "phases": {
+          "build": {
+            "cmds": ["cargo build --release"]
+          }
+        }
+      }
+    },
+    "start": {
+      "cmd": "./target/release/kleon",
+      "env": {
+        "PORT": "8080"
+      }
+    },
+    "rootDirectory": "backend"
+  }
+  
