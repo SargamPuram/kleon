@@ -15,6 +15,12 @@
         "PORT": "8080"
       }
     },
+    "region": "us-west1",
+    "replicas": 1,
+    "restartPolicy": {
+      "type": "onFailure",
+      "maxRetries": 10
+    },
     "rootDirectory": "backend"
   }
   
