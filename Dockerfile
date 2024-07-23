@@ -25,11 +25,11 @@ RUN cargo build --release
 # Verify if the binary is created
 RUN ls -la target/release/
 
-# Use a smaller base image for the final stage
-FROM debian:buster-slim
+# Use a base image with OpenSSL 3
+FROM alpine:latest
 
-# Install OpenSSL and other required libraries
-RUN apt-get update && apt-get install -y libssl-dev
+# Install OpenSSL 3 and other required libraries
+RUN apk add --no-cache openssl
 
 # Copy the compiled binary from the builder stage
 COPY --from=builder /usr/src/app/backend/target/release/backend /usr/local/bin/backend
