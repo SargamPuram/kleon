@@ -1,5 +1,5 @@
-# Use the official Rust image as the base image
-FROM rust:latest
+# Use the official Rust image as the base image with the latest version
+FROM rust:latest AS builder
 
 # Set the working directory inside the container
 WORKDIR /usr/src/backend
@@ -23,11 +23,11 @@ RUN cargo build --release
 # Use a smaller base image with just the Rust runtime to keep the final image size small
 FROM debian:buster-slim
 
-# Install required system packages
-RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
+# Install required system packages including the correct version of OpenSSL
+RUN apt-get update && apt-get install -y libssl-dev ca-certificates libssl3 && rm -rf /var/lib/apt/lists/*
 
 # Copy the built binary from the builder image
-COPY --from=0 /usr/src/backend/target/release/backend /usr/local/bin/backend
+COPY --from=builder /usr/src/backend/target/release/backend /usr/local/bin/backend
 
 # Set environment variables
 ENV RUST_LOG=info
@@ -37,4 +37,5 @@ EXPOSE 8080
 
 # Run the binary
 CMD ["backend"]
+
 
