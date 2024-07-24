@@ -20,11 +20,11 @@ COPY . .
 # Build the project
 RUN cargo build --release
 
-# Use a smaller base image with just the Rust runtime to keep the final image size small
-FROM debian:buster-slim
+# Use the latest Debian image for the runtime
+FROM debian:latest
 
 # Install required system packages including the correct version of OpenSSL
-RUN apt-get update && apt-get install -y libssl-dev ca-certificates libssl1.1 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Copy the built binary from the builder image
 COPY --from=builder /usr/src/backend/target/release/backend /usr/local/bin/backend
@@ -37,5 +37,6 @@ EXPOSE 8080
 
 # Run the binary
 CMD ["backend"]
+
 
 
