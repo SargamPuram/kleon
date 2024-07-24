@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         const { prompt } = reqBody;
 
         // Forward the request to the Rust backend
-        const res = await axios.post('http://127.0.0.1:8080/generate_sql', { prompt, dialect: 'postgresql' }, {
+        const res = await axios.post('https://kleon.onrender.com/generate_sql', { prompt, dialect: 'postgresql' }, {
             headers: {
                 'Content-Type': 'application/json',
             }

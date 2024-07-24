@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
         const { prompt, dialect }: ExplainSqlRequest = await request.json();
 
         // Make API call to your backend
-        const response = await fetch('http://localhost:8080/explain_sql', {
+        const response = await fetch('https://kleon.onrender.com/explain_sql', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
