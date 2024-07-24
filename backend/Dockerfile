@@ -24,7 +24,7 @@ RUN cargo build --release
 FROM debian:buster-slim
 
 # Install required system packages including the correct version of OpenSSL
-RUN apt-get update && apt-get install -y libssl-dev ca-certificates libssl3 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libssl-dev ca-certificates libssl1.1 && rm -rf /var/lib/apt/lists/*
 
 # Copy the built binary from the builder image
 COPY --from=builder /usr/src/backend/target/release/backend /usr/local/bin/backend
