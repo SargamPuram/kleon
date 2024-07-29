@@ -34,7 +34,6 @@ AI-Powered Data Query Interface using Rust
 Navigate to the frontend directory and install dependencies:
 
  ```bash
-Copy code
 cd frontend
 npm install
  ```
@@ -43,57 +42,56 @@ npm install
 Navigate to the backend directory and install dependencies:
 
  ```bash
-Copy code
 cd backend
 cargo build
-Configure Environment Variables
  ```
 
-4. ***Create a .env file in both frontend and backend directories and set up your environment variables. Example .env file for frontend: ***
+4. Configure Environment Variables
+5. Create a .env file in both frontend and backend directories and set up your environment variables. Example .env file for frontend: 
 
 .env
-Copy code
+ ```bash
 NEXT_PUBLIC_API_URL=http://localhost:8080
-Example .env file for backend:
+ ```
+6. Example .env file for backend:
 
-env
-Copy code
+.env
+ ```bash
 DATABASE_URL=mysql://user:password@localhost:3306/yourdatabase
-Run the Project
-
+ ```
+7. Run the Project
 Start the backend server:
 
  ```bash
-Copy code
 cd backend
 cargo run
-Start the frontend server:
  ```
-
+8. Start the frontend server:
  ```bash
-Copy code
 cd frontend
 npm run dev
-The frontend should now be available at http://localhost:3000, and it will communicate with the backend at http://localhost:8080.
  ```
+The frontend should now be available at http://localhost:3000, and it will communicate with the backend at http://localhost:8080.
+
 
 ## Usage
-Explaining SQL Queries
-Navigate to the Explain Query section.
-Enter your SQL query into the text area.
-Click Explain Query to receive a detailed explanation.
-Generating SQL Queries
-Navigate to the Generate Query section.
-Provide a prompt describing the SQL query you need.
-Click Generate Query to receive the generated SQL query.
-API Endpoints
-POST /api/explain_sql
+1. Explaining SQL Queries
+2. Navigate to the Explain Query section.
+3. Enter your SQL query into the text area.
+4. Click Explain Query to receive a detailed explanation.
+5. Generating SQL Queries
+6. Navigate to the Generate Query section.
+7. Provide a prompt describing the SQL query you need.
+8. Click Generate Query to receive the generated SQL query.
+9. API Endpoints
+1. POST /api/explain_sql
 
-Request Body: { "prompt": "your SQL query", "dialect": "mysql" }
-Response: { "message": "Explanation of the query" }
-POST /api/generate_sql
+Request Body: { "prompt": "your SQL query", "dialect": "mysql" }<br>
+Response: { "message": "Explanation of the query" }<br>
 
-Request Body: { "prompt": "your query prompt", "dialect": "mysql" }
-Response: { "query": "Generated SQL query" }
-Contributing
+2. POST /api/generate_sql
+
+Request Body: { "prompt": "your query prompt", "dialect": "mysql" }<br>
+Response: { "query": "Generated SQL query" }<br><br>
+10. Contributing<br>
 Feel free to contribute to this project by submitting pull requests or opening issues. Contributions are welcome to improve the functionality or add new features.
