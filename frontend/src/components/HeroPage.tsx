@@ -19,13 +19,13 @@ export const HeroPage = () => {
             <p className="text-center text-2xl mt-9 py-1 px-10">
                 Unlock the power of SQL like never before. <br />
                 Our AI-Powered Data Query Interface streamlines your database interactions with cutting-edge technology. <br />
-                Whether you are a data analyst, developer, or SQL enthusiast, our tool offers: <br />
+                Whether you are a data analyst, developer, or SQL enthusiast, check out our tool <br />
             </p>
             <div className="flex justify-center mt-8 mb-12">
                 <Link href="/login" legacyBehavior>
-                    <button className="bg-white text-black py-3 px-5 rounded-lg border border-white/60 font-medium mb-9">
-                        Get Started!
-                    </button>
+                <button className="bg-white text-black py-3 px-5 rounded-lg border border-white/60 font-medium mb-9 transition-all duration-300 ease-in-out hover:bg-black hover:text-white hover:shadow-lg">
+    Get Started!
+</button>
                 </Link>
             </div>
             <div className="absolute h-[375px] w-[750px] rounded-[100%] bg-[radial-gradient(ellipse,_rgba(0,0,0,0.95)_50%,_rgba(214,58,119,0.85)_90%)] left-1/2 -translate-x-1/2 bottom-[-300px] "></div>
