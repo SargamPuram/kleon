@@ -64,9 +64,11 @@ export const Navbar = () => {
           )}
           <Link href='/query' className='hover:text-opacity-100 hover:opacity-100 hover:glow transition-opacity duration-200 ease-in-out opacity-70'>Query</Link>
           <Link href='/dashboard' className='hover:text-opacity-100 hover:opacity-100 hover:glow transition-opacity duration-200 ease-in-out opacity-70'>Dashboard</Link>
-          <button className='bg-gradient-to-r from-[#b8b8f3] via-[#d7b8f3] via-[#f397d6] via-[#f42272] to-[#232e21] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 transition-opacity duration-200 ease-in-out'>
-            Get for free
-          </button>
+          <Link href='/dashboard'>
+            <button className='bg-gradient-to-r from-[#b8b8f3] via-[#d7b8f3] via-[#f397d6] via-[#f42272] to-[#232e21] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 transition-opacity duration-200 ease-in-out'>
+              Get for free
+            </button>
+          </Link>
         </nav>
       </div>
 
@@ -86,9 +88,11 @@ export const Navbar = () => {
           )}
           <Link href='/query' className='hover:text-opacity-100 hover:opacity-100 hover:glow transition-opacity duration-200 ease-in-out opacity-70'>Query</Link>
           <Link href='/dashboard' className='hover:text-opacity-100 hover:opacity-100 hover:glow transition-opacity duration-200 ease-in-out opacity-70'>Dashboard</Link>
-          <button className='bg-gradient-to-r from-[#b8b8f3] via-[#d7b8f3] via-[#f397d6] via-[#f42272] to-[#232e21] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 transition-opacity duration-200 ease-in-out'>
-            Get for free
-          </button>
+          <Link href='/dashboard'>
+            <button className='bg-gradient-to-r from-[#b8b8f3] via-[#d7b8f3] via-[#f397d6] via-[#f42272] to-[#232e21] text-white font-bold px-4 py-2 rounded-md hover:opacity-80 transition-opacity duration-200 ease-in-out'>
+              Get for free
+            </button>
+          </Link>
         </div>
       )}
     </div>
