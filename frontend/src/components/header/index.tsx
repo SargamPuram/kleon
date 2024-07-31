@@ -9,13 +9,13 @@ const Header = () => {
   return (
     <header className="bg-deep-blue text-light-gray py-4 px-6">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/hero" className="text-2xl font-bold nanum-myeongjo-regular ">
+        <Link href="/" className="text-2xl font-bold nanum-myeongjo-regular ">
           Kleon
         </Link>
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <Link href="/hero" className="hover:text-bright-yellow nanum-myeongjo-regular">
+              <Link href="/" className="hover:text-bright-yellow nanum-myeongjo-regular">
                 Home
               </Link>
             </li>
