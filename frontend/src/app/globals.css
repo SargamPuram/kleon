@@ -6,6 +6,10 @@
   background: linear-gradient(to bottom, #000000 0%, #6D1F5D 34%, #D63A77 65%, #F7A1A2 100%);
 }
 
+.font-cursive {
+  font-family: 'Playwrite CZ', cursive;
+}
+
 /* .font-cursive {
   font-family: 'Arizonia', cursive;
 } */
