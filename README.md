@@ -8,7 +8,7 @@ AI-Powered Data Query Interface using Rust
 
 ## Technologies Used
 
-- **Frontend:** React, Next.js
+- **Frontend:** Next.js
 - **Backend:** Rust (for query generation and explanation)
 - **API Communication:** Axios for making HTTP requests
 - **Database:** MySQL
