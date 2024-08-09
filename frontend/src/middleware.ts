@@ -5,10 +5,6 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const token = request.cookies.get('token')?.value || '';
 
-  // Logging for debugging
-  // console.log('Request Path:', path);
-  // console.log('Token:', token);
-
   // Always allow access to / and /hero regardless of login status
   if (path === '/' || path === '/hero') {
     return NextResponse.next();
@@ -31,20 +27,26 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/signup', request.nextUrl));
   }
 
-  // Redirect non-logged-in users from /query paths to /login
-  if (path.startsWith('/query') && !token) {
-    console.log('Redirecting to /login from protected query path');
+  // Redirect non-logged-in users from /queries and its subpaths to /login
+  if (path.startsWith('/queries') && !token) {
+    console.log('Redirecting to /login from protected queries path');
     return NextResponse.redirect(new URL('/login', request.nextUrl));
   }
 
-  // Redirect non-logged-in users from other protected paths to /
-  if (!token && path !== '/' && path !== '/login' && path !== '/signup') {
-    console.log('Redirecting to / from other protected paths');
-    return NextResponse.redirect(new URL('/', request.nextUrl));
+  // Redirect non-logged-in users from /query to /login
+  if (path === '/query' && !token) {
+    console.log('Redirecting to /login from /query path');
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
   }
 
   // Allow access to all other paths if logged in
-  return NextResponse.next();
+  if (token) {
+    return NextResponse.next();
+  }
+
+  // Redirect non-logged-in users from any other protected paths to /
+  console.log('Redirecting to / from other protected paths');
+  return NextResponse.redirect(new URL('/', request.nextUrl));
 }
 
 // See "Matching Paths" below to learn more
@@ -54,6 +56,7 @@ export const config = {
     '/profile',
     '/login',
     '/signup',
-    '/query/:path*',  // Matches all paths starting with /query
+    '/query',
+    '/queries/:path*',  // Matches all paths starting with /queries
   ],
 };
