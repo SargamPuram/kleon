@@ -32,6 +32,7 @@ COPY --from=builder /usr/src/backend/target/release/backend /usr/local/bin/backe
 # Set environment variables
 ENV RUST_LOG=info
 
+
 # Expose the port your application runs on
 EXPOSE 8080
 
