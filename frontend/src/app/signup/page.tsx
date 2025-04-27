@@ -20,7 +20,7 @@ export default function SignUp() {
     const onSignup = async () => {
         try {
             setLoading(true);
-            const response = await axios.post("/api/users/signup", user);
+            const response = await axios.post("https://kleon.onrender.com/api/users/signup", user);
             console.log("Signup success", response.data);
             router.push("/login");
         } catch (error: any) {
